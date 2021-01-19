@@ -1,0 +1,124 @@
+#This program takes two inputs from the user (price and cash) and returns the amount and denomination of change to be given.
+
+#defintions
+
+twenties = 0
+tens = 0
+fives = 0
+ones = 0
+quarters = 0
+dimes = 0
+nickels = 0
+pennies = 0
+
+#core code
+
+def change_calculation():
+    global twenties, tens, fives, ones, quarters, dimes, nickels, pennies
+    price = input('How much does it cost?')
+    cash = input('How much cash was given?')
+    price = float(price)
+    cash = float(cash)
+    cash_back = cash - price
+    cash_back_str = str(cash_back)
+    cash_back_print = 'Your change is ' + cash_back_str + '. Have a good day!'
+    print (cash_back_print)
+
+    #reduces cash as it counts out denomination
+
+    while cash_back >= 20:
+        cash_back -= 20
+        twenties = twenties + 1
+    while cash_back >= 10:
+        cash_back -= 10
+        tens += 1
+    while cash_back >= 5:
+        cash_back -= 5
+        fives += 1
+    while cash_back >= 1:
+        cash_back -= 1
+        ones += 1
+    while cash_back >= 0.25:
+        cash_back -= 0.25
+        quarters += 1
+    while cash_back >= 0.1:
+        cash_back -= 0.1
+        dimes += 1
+    while cash_back >= 0.05:
+        cash_back -= 0.05
+        nickles += 1
+    while cash_back >= 0.01:
+        cash_back -= 0.01
+        pennies += 1
+
+    # print outs
+
+    twenties_print = '%s $20' % twenties
+    tens_print = '%s $10' % tens
+    fives_print = '%s $5' % fives
+    ones_print = '%s $1' % ones
+    quarters_print = '%s 0.25₵' % quarters
+    dimes_print = '%s 0.10₵' % dimes
+    nickels_print = '%s 0.05₵' % nickels
+    pennies_print = '%s 0.01₵' % pennies
+
+    # code to decided denominations to print
+
+    def print_twenties(twenties):
+        if twenties > 0:
+            print(twenties_print)
+            print_tens(tens)
+        else:
+            print_tens(tens)
+
+    def print_tens(tens):
+        if tens > 0:
+            print(tens_print)
+            print_fives(fives)
+        else:
+            print_fives(fives)
+
+    def print_fives(fives):
+        if fives > 0:
+            print(fives_print)
+            print_ones(ones)
+        else:
+            print_ones(ones)
+
+    def print_ones(ones):
+        if ones > 0:
+            print(ones_print)
+            print_quarters(quarters)
+        else:
+            print_quarters(quarters)
+
+    def print_quarters(quarters):
+        if quarters > 0:
+            print(quarters_print)
+            print_dimes(dimes)
+        else:
+            print_dimes(dimes)
+
+    def print_dimes(dimes):
+        if dimes > 0:
+            print(dimes_print)
+            print_nickels(nickels)
+        else:
+            print_nickels(nickels)
+
+    def print_nickels(nickels):
+        if nickels > 0:
+            print(nickels_print)
+            print_pennies(pennies)
+        else:
+            print_pennies(pennies)
+
+    def print_pennies(pennies):
+        if pennies > 0:
+            print(pennies_print)
+        else:
+            return
+
+    # prints out denominations as needed
+
+    print (print_twenties(twenties))
